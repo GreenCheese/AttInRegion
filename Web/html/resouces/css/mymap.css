@@ -1,0 +1,76 @@
+ <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #regionSelector {
+    	float: left; 
+    	top: 0px; 
+    	left: 10px; 
+      }
+
+      #map {
+        height: 200;
+        width: 200;
+    	padding: 1px; 
+    	border: solid 1px black; 
+    	float: left; 
+    	position: relative; 
+    	top: 0px; 
+    	left: 100px; 
+      }
+
+      #vislabelselector {
+      	height: 19;
+        width: 160;
+    	padding: 1px; 
+    	
+    	float: left; 
+    	position: relative; 
+    	top: 210px; 
+    	left: -380px; 
+      }
+
+      #attselector{
+      	height: 19;
+        width: 160;
+    	padding: 1px; 
+		position: relative; 
+		float: left; 
+
+      	top: 230px; 
+    	left: -542px; 
+      }
+
+      #dtselect{
+		position: relative; 
+		float: left; 
+      	top: 250px; 
+    	left: -380px; 
+      }
+
+      #addTimeButton{
+    	float: left; 
+		position: relative; 
+      	top: 272px; 
+    	left: 502px; 
+      }
+      #otherOptions{
+      	float: left; 
+      	position: relative; 
+      	top: 190px; 
+    	 left: -700px; 	
+      }
+      
+      #submitButton{
+      	float: left; 
+      	position: relative; 
+      	top: 350px; 
+    	left: -110px; 	
+      }
+
+      textarea {
+ 	  	resize: none;
+ 	  }
+</style>

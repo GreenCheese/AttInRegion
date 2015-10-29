@@ -1,0 +1,150 @@
+var regionShape = new google.maps.Polygon({
+    paths: region,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 1,
+    fillColor: '#FFB537',
+    fillOpacity: 0.35
+  });
+var track = [];
+var enable_custom_style = true
+function initMap() {
+	map = new google.maps.Map(document.getElementById('map'), {
+		center: {lat: 55, lng: 55},
+		zoom: 12
+	});
+
+	setMapStyle();
+	for (var i = 0; i < vehicleData.length; i++) {
+		setTrack(vehicleData[i]);
+	}
+    regionShape.setMap(map);
+	map.fitBounds(bounds);
+}
+
+function setTrack(vehData){
+	track = new Array(vehData.length);
+    for (var i = 0; i < vehData.length; i++) {
+		lng = vehData[i]["lng"];
+		lat = vehData[i]["lat"]
+        track[i] = {};
+        track[i]['lng']=lng;
+        track[i]['lat']=lat;
+
+		bounds.extend(
+			new google.maps.LatLng(lat,lng)
+		);
+
+        var s_times = '<p>Время = '+ vehData[i]["time"]+" ,</p>";
+		var s_lat= '<p>Широта = '+ vehData[i]["lat"]+" град,</p>";
+		var s_lon = '<p>Долгота = '+ vehData[i]["lng"]+" град,</p>";
+		var s_speed = '<p><b>Скорость = '+ vehData[i]["speed"]+" км/ч,</b></p>";
+		var s_bearing = '<p>Путевой угол = '+ vehData[i]["bearing"]+" град.</p>";
+		
+		var contentString = s_times+s_lat+s_lon+s_speed+s_bearing;
+
+		var marker = new google.maps.Marker({
+    		position: track[i],
+    		icon: {
+      			path: google.maps.SymbolPath.CIRCLE,
+      			scale: 2
+    		},
+    		draggable: false,
+    		map: map
+		});
+		attachMessage(marker, contentString)
+	}
+ 	var lineSymbol = {
+	    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+  	};
+    
+    var vehiclePath = new google.maps.Polyline({
+	    path: track,
+        icons: [{
+      		icon: lineSymbol,
+      		offset: '100%'
+    	}],
+	    geodesic: true,
+	    strokeColor: '#00FF00',
+	    strokeOpacity: 1.0,
+	    strokeWeight: 2
+  	});
+    
+  	vehiclePath.setMap(map); 
+	carAnimation(track);	
+}
+
+function attachMessage(marker, message){
+  var infowindow = new google.maps.InfoWindow({
+    content: message
+  });
+
+  marker.addListener('click', function() {
+    infowindow.open(marker.get('map'), marker);
+  });
+}
+
+function carAnimation(tr){
+	var lineSymbol = {
+		path: "M-120,-50 h200 c 50,0 50,100 0, 100 h-200 z m30,-7 h 40 m70, 0 h 40 m 0, 114 h -40 m-70, 0 h -40 m162, -106 t 6,10 28,4 m-34, 86 t 6,-10 28,-4 m -52 -86 q 20, 50, 0 100 m-178,-82 v15 m 0, 36 v 15 m 174 -85 l-40, 20, -60, 0, -30 -20 m130 100 l-40, -20, -60, 0, -30 20 v-100 m 30 20 v 60 m 60 0 v -60",
+    	scale: .2,
+		fillColor: '#FF0000',
+        fillOpacity: .6,
+    	strokeColor: '#000000',
+        strokeOpacity: 1,
+		strokeWeight: 2,
+		rotation: -90,
+  	};
+
+ 	var line = new google.maps.Polyline({
+    	path: tr,
+        strokeOpacity: 0,
+    	icons: [{
+      		icon: lineSymbol,
+      		offset: '100%'
+    	}],
+    	map: map
+  	});
+  animateCar(line);
+}
+
+function animateCar(line) {
+    var count = 0;
+    window.setInterval(function() {
+      count = (count + 1) % 200;
+
+      var icons = line.get('icons');
+      icons[0].offset = (count / 2) + '%';
+      line.set('icons', icons);
+  }, 20);
+}
+
+function setMapStyle() {
+	if (enable_custom_style){
+		var styles = [
+		{
+			stylers: [
+			{ hue: "#00ffe6" },
+			{ saturation: -80 }
+			]
+		},
+		{
+			featureType: "road",
+			elementType: "geometry",
+			stylers: [
+			{ lightness: 100 },
+			{ visibility: "simplified" }
+			]
+		},
+		];
+		map.setOptions({styles: styles});
+	} else
+		map.setOptions({styles: null});
+} 
+  
+
+
+google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+  </body>
+</html>
