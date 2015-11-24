@@ -18,4 +18,5 @@ server.mount "/send", Sender
 server.mount "/get", Getter
 server.mount "/html", WEBrick::HTTPServlet::FileHandler, './html'
 server.mount "/rep", WEBrick::HTTPServlet::FileHandler, './attInRange/Report'
+print (IO.read("version.txt")+"\n")
 server.start

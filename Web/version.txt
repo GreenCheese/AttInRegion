@@ -1,0 +1,5 @@
+**********************
+Webrick web server
+Version 0.1.6
+Author Andrey Artemev
+**********************
