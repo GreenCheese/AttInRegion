@@ -86,7 +86,7 @@ class BaseRequesterEx < BaseRequester
 		begin
 			uri = URI.parse(response['location'])
 		rescue Exception => e
-			puts "\nInvalid response. \n\t#{e}"
+			puts "\ngetDomain: Invalid response. \n\t#{e}"
 			return ""
 		end
 		return uri.scheme+"://"+uri.host
@@ -96,7 +96,7 @@ class BaseRequesterEx < BaseRequester
 		begin
 			uri = URI.parse(response['location'])
 		rescue Exception => e
-			puts "\nInvalid response. \n\t#{e}"
+			puts "\ngetRequest_uri: Invalid response. \n\t#{e}"
 			return ""
 		end
 		

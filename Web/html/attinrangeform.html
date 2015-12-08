@@ -122,29 +122,31 @@
             <%= s_erb_regions_script %>
     </table>
 
-    <div id = "addTimeButton">
-        <button id="AddTimePeriod" onclick="AddPeriod()">+</button>
+   
+    
+    <div id = "regionSection">
+        <fieldset>
+        <legend>Выбор региона для отчета</legend>
+        <div id = "regionSelector">
+            <select id="s1" name = "region" multiple="multiple">
+                <%= s_erb_regions %>
+
+                <!--option value='1'>Low</option>
+                <option value='2'>MediumMediumMediumMedium</option>
+                <option>High</option-->
+            </select>
+        </div>
+        <div id="map"></div>
+        </fieldset>
     </div>
     
-    
-
-    <div id = "regionSelector">
-        <select id="s1" name = "region" multiple="multiple">
-            <%= s_erb_regions %>
-
-            <!--option value='1'>Low</option>
-            <option value='2'>MediumMediumMediumMedium</option>
-            <option>High</option-->
-        </select>
-    </div>
-
     <form id = "parameters" action='/send/attinrangeSend'>
 
     <!--<form method='POST' action='/save'>"-->
-    
-    <div id="map"></div>
 
-  
+    <div id = "otherOptionSection">
+        <fieldset>
+        <legend>Выбор параметров АТТ</legend>
         <div id="vislabelselector" >
             <select name="vislable" form = "parameters">
                 <option>Выберете метку ВИС</option>
@@ -160,11 +162,19 @@
             </select>
         </div>
         
-        <div id = "submitButton">
-            <input type='submit'>
+        <div id = "includeSubtypesOption">
+            Включая подтипы
+            <input type = "textbox" name = "includeSubtypes" readonly="true" value = "true" form = "parameters"></input> 
         </div>
-        
-    </form>
+        </fieldset>
+
+        <fieldset>
+        <legend>Выбор временных диапазонов</legend>
+        <div id = "intervalSetupOption">            
+            при отсутствии интервала
+            <input type = "textbox" name = "interval" readonly="true" value = "15min" form = "parameters"></input> 
+        </div>
+
         <div id = "dtselect">
             С
             <input type="date" id="FromDate" name="FromDate">
@@ -173,6 +183,9 @@
             <input type="date" id="ToDate" name="ToDate">
             <input type="time" id="ToTime" name="ToTime">
             
+            <div id = "addTimeButton">
+                <button id="AddTimePeriod" onclick="AddPeriod()">Добавить время</button>
+            </div>
             <!--datagrid http://myrusakov.ru/html-5-interaktivnye-elementy.html
             required Обязательное для заполнения поле.
             form Связывает текстовое поле с формой по её идентификатору.
@@ -180,24 +193,23 @@
             <textarea name="comment" placeholder="Комментарий" 
         required form="text">
             -->
-    
+            <p>
             <table id = "periodTable" border="1" name="timeTable">
             <col width="150" valign="top">
             <col width="150" valign="top">
                 <tr><th>С</th><th>По</th></tr>
             </table>
         </div>
-    
-        <div id = "otherOptions">
-            Включая подтипы
-            <input type = "textbox" name = "includeSubtypes" readonly="true" value = "true" form = "parameters"></input> 
-            <br>
-            при отсутствии интервала
-            <input type = "textbox" name = "interval" readonly="true" value = "15min" form = "parameters"></input> 
+        </fieldset>
+    </div>
 
-        </div>
-
-
+    <div id = "submitButton" form = "parameters">
+        <input type='submit'>
+    </div>        
+    </form>
+        
+<!--
+    <div id = "getReportForm">
         <form id = "repget" action='/get/attinrangeSend'>
             <fieldset>
             <legend>Получить отчет</legend>
@@ -210,7 +222,8 @@
             </div>
              </fieldset>
         </form>
-
+    </div>
+-->    
     <!--script src="DropDown.js"></script-->
     <script src="html/resouces/js/TimePicker.js"></script>
 </body>

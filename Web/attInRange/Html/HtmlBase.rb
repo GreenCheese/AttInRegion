@@ -80,22 +80,15 @@ class HtmlTable < HtmlBase
 end
 
 class HtmlPlain < HtmlBase
-	:top
-	:bottom
-	def initialize(filename, top, bot)
-		@top = top
-		@bottom = bot
+	def initialize(filename)
 		super(filename)
 	end
 
 	def createHtml(innerPart)
 		html = FileCreator.new(@filename, "wb+")
-		
-		ft=IO.read(@top)
-		html.write(ft)
-		html.write(innerPart)
-		fb=IO.read(@bottom)
-		html.write(fb)
+		s_erb_regions_vehicle = innerPart
+		templ = ERB.new(IO.read("./attInRange/Html/template").force_encoding("utf-8")).result(binding)
+		html.write(templ)
 		html.close
 	end
 end
@@ -144,15 +137,10 @@ end
 class PlainText
 	:text
 	:hp
-	:top
-	:bot
 	
 	def initialize(filename)
-
-		@top = "./attInRange/Html/top"
-		@bot = "./attInRange/Html/bot"
 		@text = []
-		@hp = HtmlPlain.new(filename, @top, @bot)
+		@hp = HtmlPlain.new(filename)
 	end
 
 	def addItem(item)

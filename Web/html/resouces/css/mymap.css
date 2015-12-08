@@ -1,76 +1,85 @@
- <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #regionSelector {
-    	float: left; 
-    	top: 0px; 
-    	left: 10px; 
-      }
+<style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
-      #map {
+    #regionSection{
+        float: left; 
+        width: 100%;
+        margin: 10px;
+        min-width: 700px;
+        margin-top: 30px;
+        margin-bottom: 5px;
+    }
+
+    #otherOptionSection{
+        float: left; 
+        width: 100%;
+        min-width: 640px;
+        margin: 10px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    #regionSelector {
+        float: left; 
+        width: 25%;
+        min-width: 200px;
+        margin-bottom: 5px;
+        margin: 10px;
+        margin-left: 20px;
+        padding: 1px; 
+    }
+
+    #map {
         height: 200;
         width: 200;
-    	padding: 1px; 
-    	border: solid 1px black; 
-    	float: left; 
-    	position: relative; 
-    	top: 0px; 
-    	left: 100px; 
+        border: solid 1px black; 
+        margin-left: 50;
+        margin: 0 auto;
+        float: right;
+        position: relative; 
+    }
+
+    #includeSubtypesOption, #intervalSetupOption, #attselector, #vislabelselector, #dtselect, #submitButton{
+        margin: 10px;
+        margin-left: 20px;
+        padding: 1px; 
+        position: relative; 
+    }
+
+    #vislabelselector{
+        min-width: 640px;
+    }
+
+    #dtselect{
+        float: left; 
+        min-width: 640px;
+    }
+
+    #addTimeButton{
+        float: right; 
+        position: relative; 
+        margin-left: 20px;
+    }
+
+    #submitButton{
+        float: right;
+        width: 60%;
+        min-width: 640px;
+        margin: 10px;
+        margin-top: 30px;
+        margin-bottom: 5px;
       }
 
-      #vislabelselector {
-      	height: 19;
-        width: 160;
-    	padding: 1px; 
-    	
-    	float: left; 
-    	position: relative; 
-    	top: 210px; 
-    	left: -380px; 
-      }
+    #getReportForm{
+        float: left;
+        position: relative; 
+    }
 
-      #attselector{
-      	height: 19;
-        width: 160;
-    	padding: 1px; 
-		position: relative; 
-		float: left; 
-
-      	top: 230px; 
-    	left: -542px; 
-      }
-
-      #dtselect{
-		position: relative; 
-		float: left; 
-      	top: 250px; 
-    	left: -380px; 
-      }
-
-      #addTimeButton{
-    	float: left; 
-		position: relative; 
-      	top: 272px; 
-    	left: 502px; 
-      }
-      #otherOptions{
-      	float: left; 
-      	position: relative; 
-      	top: 190px; 
-    	 left: -700px; 	
-      }
-      
-      #submitButton{
-      	float: left; 
-      	position: relative; 
-      	top: 350px; 
-    	left: -110px; 	
-      }
-
-      textarea {
- 	  	resize: none;
- 	  }
+    textarea {
+        resize: none;
+    }
 </style>

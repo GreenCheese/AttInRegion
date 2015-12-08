@@ -27,13 +27,20 @@ class RequesterManager < BaseRequesterEx
 
 		response = execute(Const::DOMAIN, Const::ATTINREGION_CHECK_REPORT, params)
 		hash = JSON.parse response.body 
+
 		if (hash["status"]=="ready")
 			p "checkReportReady #{pendingRequest.id} ok"
 			
 			hash["req_parameters"] = pendingRequest.parameters
 			@rawReports["rawReport"] << hash
 			return true
+		elsif (hash["status"]=="error")
+			p "checkReportReady #{pendingRequest.id} error"
+			hash["req_parameters"] = pendingRequest.parameters
+			@rawReports["rawReport"] << hash
+			return true
 		end
+			
 		p "checkReportReady #{pendingRequest.id} false"
 		return false
 	end
